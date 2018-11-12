@@ -1,0 +1,13 @@
+#ifdef GL_ES
+precision mediump float;
+#endif
+attribute vec4 position;
+attribute vec4 texcoord;
+attribute vec4 normal;
+uniform mat4 ModelMatrix;
+uniform mat4 ViewMatrix;
+uniform mat4 ProjectionMatrix;
+void main()
+{
+	gl_Position=ProjectionMatrix*ViewMatrix*ModelMatrix*position;
+}
