@@ -15,7 +15,7 @@ Model model;
 
 void Init(){
     model.Init("Res/Sphere.obj");
-    model.mShader->Init("Res/specular_vs.vs","Res/specular_vs.fs");
+    model.mShader->Init("Res/blin_vs.vs","Res/blin_vs.fs");
     model.SetPosition(0.0f, 0.0f, 0.0f);
 
     /// 环境材质 *  环境光
