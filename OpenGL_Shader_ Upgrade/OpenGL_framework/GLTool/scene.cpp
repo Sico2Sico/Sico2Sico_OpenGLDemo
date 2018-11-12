@@ -10,36 +10,21 @@
 #include "utils.hpp"
 #include "model.hpp"
 glm::mat4 viewMatrix, projectionMatrix;
-glm::vec3 cameraPos(4.0f,3.0f,4.0f);
+glm::vec3 cameraPos(0.0f,0.0f,0.0f);
 Model model;
 
 void Init(){
-    model.Init("Res/Sphere.obj");
-    model.mShader->Init("Res/blin_vs.vs","Res/blin_vs.fs");
-    model.SetPosition(0.0f, 0.0f, 0.0f);
-
-    /// 环境材质 *  环境光
-    model.SetAmbientMaterial(0.1f,0.1f, 0.1f,1.0f);
-    model.mShader->SetVec4("U_AmbientLight", 0.5f,0.6f, 0.3f,1.0f);
-
-    /// 漫反射光
-    model.SetDiffuseMaterial(0.4, 0.4, 0.4,1.0f);
-    model.mShader->SetVec4("U_DiffuseLight", 0.8f, 0.8f,0.8f,1.0f);
-    model.mShader->SetVec4("U_LightPos",1.0, 1.0, 0.0, 0.0);
-
-    /// 镜面反射
-    model.SetSpecularMaterial(1.0, 1.0, 1.0, 1.0);
-    model.mShader->SetVec4("U_SpecularLight", 1.0f, 1.0f, 1.0f,1.0f);
-    model.mShader->SetVec4("U_CamerPos",cameraPos.x, cameraPos.y, cameraPos.y, 1.0f);
-
-    viewMatrix = glm::lookAt(cameraPos, glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+    model.Init("Res/Cube.obj");
+    model.mShader->Init("Res/skybox.vs","Res/skybox.fs");
+    model.mShader->SetTextureCube("U_Texture", CreateTextureCubeFromBMP("Res/front.bmp","Res/back.bmp","Res/left.bmp","Res/right.bmp","Res/bottom.bmp","Res/top.bmp"));
+    viewMatrix = glm::lookAt(cameraPos, glm::vec3(0.0f, 0.0f, -1.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 
 }
 void SetViewPortSize(float width, float height){
     projectionMatrix = glm::perspective(50.0f,width/height,0.1f,100.0f);
 }
 void Draw(){
-    glClearColor(0.4f,0.6f, 0.1f, 1.0f);
+    glClearColor(0.0f,0.0f, 0.0f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
     model.Draw(viewMatrix, projectionMatrix, cameraPos.x,cameraPos.y, cameraPos.z);
 }
