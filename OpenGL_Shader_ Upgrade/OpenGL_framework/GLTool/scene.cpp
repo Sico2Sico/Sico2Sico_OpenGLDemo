@@ -10,14 +10,15 @@
 #include "utils.hpp"
 #include "model.hpp"
 glm::mat4 viewMatrix, projectionMatrix;
-glm::vec3 cameraPos(0.0f,0.0f,0.0f);
+glm::vec3 cameraPos(4.0f,3.0f,4.0f);
 Model model;
 
 void Init(){
-    model.Init("Res/Cube.obj");
-    model.mShader->Init("Res/skybox.vs","Res/skybox.fs");
+    model.Init("Res/Sphere.obj");
+    model.mShader->Init("Res/refraction.vs","Res/refraction.fs");
     model.mShader->SetTextureCube("U_Texture", CreateTextureCubeFromBMP("Res/front.bmp","Res/back.bmp","Res/left.bmp","Res/right.bmp","Res/bottom.bmp","Res/top.bmp"));
-    viewMatrix = glm::lookAt(cameraPos, glm::vec3(0.0f, 0.0f, -1.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+    model.mShader->SetVec4("U_CameraPos", cameraPos.x, cameraPos.y, cameraPos.z, 1.0f);
+    viewMatrix = glm::lookAt(cameraPos, glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 
 }
 void SetViewPortSize(float width, float height){
