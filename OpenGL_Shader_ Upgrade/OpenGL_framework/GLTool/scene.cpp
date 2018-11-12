@@ -15,10 +15,10 @@ Model model;
 
 void Init(){
     model.Init("Res/Sphere.obj");
-    model.mShader->Init("Res/diffuse_vs.vs","Res/diffuse_vs.fs");
+    model.mShader->Init("Res/specular_vs.vs","Res/specular_vs.fs");
     model.SetPosition(0.0f, 0.0f, 0.0f);
 
-    /// 环境光 *  环境关材质反射系数
+    /// 环境材质 *  环境光
     model.SetAmbientMaterial(0.1f,0.1f, 0.1f,1.0f);
     model.mShader->SetVec4("U_AmbientLight", 0.5f,0.6f, 0.3f,1.0f);
 
@@ -26,6 +26,11 @@ void Init(){
     model.SetDiffuseMaterial(0.4, 0.4, 0.4,1.0f);
     model.mShader->SetVec4("U_DiffuseLight", 0.8f, 0.8f,0.8f,1.0f);
     model.mShader->SetVec4("U_LightPos",1.0, 1.0, 0.0, 0.0);
+
+    /// 镜面反射
+    model.SetSpecularMaterial(1.0, 1.0, 1.0, 1.0);
+    model.mShader->SetVec4("U_SpecularLight", 1.0f, 1.0f, 1.0f,1.0f);
+    model.mShader->SetVec4("U_CamerPos",cameraPos.x, cameraPos.y, cameraPos.y, 1.0f);
 
     viewMatrix = glm::lookAt(cameraPos, glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 
@@ -38,3 +43,9 @@ void Draw(){
     glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
     model.Draw(viewMatrix, projectionMatrix, cameraPos.x,cameraPos.y, cameraPos.z);
 }
+
+
+
+
+
+
