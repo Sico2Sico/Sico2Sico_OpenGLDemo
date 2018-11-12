@@ -1,23 +1,22 @@
 //
 //  fullscreenquad.hpp
-//  OpenGLGToolDemo
+//  OpenGL_framework
 //
 //  Created by 德志 on 2018/11/12.
 //  Copyright © 2018 com.aiiage.www. All rights reserved.
 //
 
-#ifndef fullscreenquad_h
-#define fullscreenquad_h
+#ifndef fullscreenquad_hpp
+#define fullscreenquad_hpp
+
 #include "Header.h"
 #include "vertexbuffer.hpp"
 #include "shader.hpp"
-#include "utils.hpp"
 
-class FullScreenQuad {
+class FullScreenQuad{
 public:
     VertexBuffer *mVertexBuffer;
     Shader *mShader;
-
 public:
     void Init();
     void Draw();
@@ -27,5 +26,4 @@ public:
     void DrawToRightBottom();
 };
 
-
-#endif /* fullscreenquad_h */
+#endif /* fullscreenquad_hpp */

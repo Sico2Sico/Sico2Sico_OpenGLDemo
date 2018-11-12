@@ -9,11 +9,12 @@
 /* Begin PBXBuildFile section */
 		0726CEC121994406007B4AD9 /* vertexbuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0726CEB621994406007B4AD9 /* vertexbuffer.cpp */; };
 		0726CEC221994406007B4AD9 /* utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0726CEB721994406007B4AD9 /* utils.cpp */; };
-		0726CEC321994406007B4AD9 /* fullscreenquad.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0726CEB821994406007B4AD9 /* fullscreenquad.cpp */; };
 		0726CEC421994406007B4AD9 /* shader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0726CEBA21994406007B4AD9 /* shader.cpp */; };
 		0726CEC521994406007B4AD9 /* model.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0726CEBC21994406007B4AD9 /* model.cpp */; };
 		0726CEC721994567007B4AD9 /* scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0726CEC621994567007B4AD9 /* scene.cpp */; };
 		0726CEC921994812007B4AD9 /* Res in Resources */ = {isa = PBXBuildFile; fileRef = 0726CEC821994812007B4AD9 /* Res */; };
+		0750BAB3219981C6005A7254 /* framebufferobject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0750BAB1219981C6005A7254 /* framebufferobject.cpp */; };
+		0750BAB6219989F8005A7254 /* fullscreenquad.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0750BAB4219989F8005A7254 /* fullscreenquad.cpp */; };
 		078EC87121930F4700A66659 /* Glm in Resources */ = {isa = PBXBuildFile; fileRef = 078EC87021930F4700A66659 /* Glm */; };
 		07F1F099219185E80035B0FB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 07F1F098219185E80035B0FB /* AppDelegate.m */; };
 		07F1F09F219185E80035B0FB /* GameViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 07F1F09E219185E80035B0FB /* GameViewController.mm */; };
@@ -29,10 +30,8 @@
 		0726CEB421994381007B4AD9 /* Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Header.h; sourceTree = "<group>"; };
 		0726CEB621994406007B4AD9 /* vertexbuffer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = vertexbuffer.cpp; sourceTree = "<group>"; };
 		0726CEB721994406007B4AD9 /* utils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = utils.cpp; sourceTree = "<group>"; };
-		0726CEB821994406007B4AD9 /* fullscreenquad.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = fullscreenquad.cpp; sourceTree = "<group>"; };
 		0726CEB921994406007B4AD9 /* model.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = model.hpp; sourceTree = "<group>"; };
 		0726CEBA21994406007B4AD9 /* shader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = shader.cpp; sourceTree = "<group>"; };
-		0726CEBB21994406007B4AD9 /* fullscreenquad.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = fullscreenquad.hpp; sourceTree = "<group>"; };
 		0726CEBC21994406007B4AD9 /* model.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = model.cpp; sourceTree = "<group>"; };
 		0726CEBD21994406007B4AD9 /* shader.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = shader.hpp; sourceTree = "<group>"; };
 		0726CEBE21994406007B4AD9 /* vertexbuffer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = vertexbuffer.hpp; sourceTree = "<group>"; };
@@ -40,6 +39,10 @@
 		0726CEC021994406007B4AD9 /* scene.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = scene.hpp; sourceTree = "<group>"; };
 		0726CEC621994567007B4AD9 /* scene.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = scene.cpp; sourceTree = "<group>"; };
 		0726CEC821994812007B4AD9 /* Res */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Res; sourceTree = "<group>"; };
+		0750BAB1219981C6005A7254 /* framebufferobject.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = framebufferobject.cpp; sourceTree = "<group>"; };
+		0750BAB2219981C6005A7254 /* framebufferobject.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = framebufferobject.hpp; sourceTree = "<group>"; };
+		0750BAB4219989F8005A7254 /* fullscreenquad.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = fullscreenquad.cpp; sourceTree = "<group>"; };
+		0750BAB5219989F8005A7254 /* fullscreenquad.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = fullscreenquad.hpp; sourceTree = "<group>"; };
 		078EC87021930F4700A66659 /* Glm */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Glm; sourceTree = "<group>"; };
 		07F1F094219185E80035B0FB /* OpenGL_framework.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenGL_framework.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		07F1F097219185E80035B0FB /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -71,18 +74,20 @@
 		0726CEB521994406007B4AD9 /* GLTool */ = {
 			isa = PBXGroup;
 			children = (
+				0750BAB1219981C6005A7254 /* framebufferobject.cpp */,
+				0750BAB2219981C6005A7254 /* framebufferobject.hpp */,
 				0726CEBE21994406007B4AD9 /* vertexbuffer.hpp */,
 				0726CEB621994406007B4AD9 /* vertexbuffer.cpp */,
 				0726CEB721994406007B4AD9 /* utils.cpp */,
 				0726CEBF21994406007B4AD9 /* utils.hpp */,
-				0726CEBB21994406007B4AD9 /* fullscreenquad.hpp */,
-				0726CEB821994406007B4AD9 /* fullscreenquad.cpp */,
 				0726CEBC21994406007B4AD9 /* model.cpp */,
 				0726CEB921994406007B4AD9 /* model.hpp */,
 				0726CEBA21994406007B4AD9 /* shader.cpp */,
 				0726CEBD21994406007B4AD9 /* shader.hpp */,
 				0726CEC021994406007B4AD9 /* scene.hpp */,
 				0726CEC621994567007B4AD9 /* scene.cpp */,
+				0750BAB4219989F8005A7254 /* fullscreenquad.cpp */,
+				0750BAB5219989F8005A7254 /* fullscreenquad.hpp */,
 			);
 			path = GLTool;
 			sourceTree = "<group>";
@@ -205,13 +210,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0750BAB3219981C6005A7254 /* framebufferobject.cpp in Sources */,
 				0726CEC421994406007B4AD9 /* shader.cpp in Sources */,
 				0726CEC721994567007B4AD9 /* scene.cpp in Sources */,
 				07F1F0AD219185E90035B0FB /* main.m in Sources */,
 				0726CEC221994406007B4AD9 /* utils.cpp in Sources */,
 				0726CEC521994406007B4AD9 /* model.cpp in Sources */,
 				0726CEC121994406007B4AD9 /* vertexbuffer.cpp in Sources */,
-				0726CEC321994406007B4AD9 /* fullscreenquad.cpp in Sources */,
+				0750BAB6219989F8005A7254 /* fullscreenquad.cpp in Sources */,
 				07F1F09F219185E80035B0FB /* GameViewController.mm in Sources */,
 				07F1F099219185E80035B0FB /* AppDelegate.m in Sources */,
 			);
