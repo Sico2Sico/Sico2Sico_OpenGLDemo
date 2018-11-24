@@ -178,3 +178,30 @@
   glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,0); 
   
   ```
+
+
+- 属性变量的启用
+
+  ```c++
+  
+  /// 顶点坐标 
+  /// 启用
+  glEnableVertexAttribArray(mPositionLocation);
+  
+  /// 第一个参数 地址
+  /// 第二个参数 需要读取几个数据(顶点 x y z w 4 ) (颜色 R G B A 4个)
+  /// 第三个参数 数据类型
+  /// 第四个参数 是否需要转至
+  /// 第五个参数 （每一个Code 核心 单独一个单元 数据大小 （顶点+颜色+纹理）-个小的buffer 可以看作是一个二维数组的一行数据） 的大小
+  
+  /// 第六个参数 改属性从一个code的哪个位置 下标开始获取值 获取值的起始位置或下标
+  glVertexAttribPointer(mPositionLocation, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), 0);
+  
+  /// 颜色
+  glEnableVertexAttribArray(mColorLocation);
+  glVertexAttribPointer(mColorLocation, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(sizeof(float) * 4));
+  
+  /// 纹理坐标
+  glEnableVertexAttribArray(mTexcoordLocation);
+  glVertexAttribPointer(mTexcoordLocation, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(sizeof(float) * 8));
+  ```
