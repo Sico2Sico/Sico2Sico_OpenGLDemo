@@ -161,3 +161,20 @@
   /// 最远的距离
   projectionMatrix = glm:perspective(60,width/height,0.1,1000.0f);
   ```
+
+- 设置 ebo
+
+  ```C++
+  GLuint ebo;
+  unsigned short indexes[] = {1,2,3,1,3,4};
+  glGenBuffers(1,&ebo);
+  glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,ebo);
+  glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(float)*6,indexes,GL_STATIC_DEAW);
+  glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,0);
+  
+  /// EBO绘制方法
+  glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,ebo);
+  glDrawElements(GL_TRIANGES,4,GL_UNSINGNED_SHORT,0)
+  glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,0); 
+  
+  ```
