@@ -205,3 +205,33 @@
   glEnableVertexAttribArray(mTexcoordLocation);
   glVertexAttribPointer(mTexcoordLocation, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(sizeof(float) * 8));
   ```
+
+
+
+- 纹理设置
+
+  ```c++
+  GLuint texture;
+  glGenTextures(1, &texture);
+  glBindTexture(GL_TEXTURE_2D, texture);
+  
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+  
+  /// 第一个参数 纹理类型
+  /// 第二个参数 0；
+  /// 第三个参数 数据类型
+  /// 第四个参数 宽度
+  /// 第五个参数 高度
+  /// 第六个参数 0
+  /// 第七个参数 内存中数据类型
+  /// 第八个参数 单个数据的数据类型
+  /// 第九个参数 数据集起始地址
+  /// 拷贝数据到GPU上了
+  glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, pixelData);
+  
+  /// 把当前纹理设置为0 号纹理
+  glBindTexture(GL_TEXTURE_2D, 0);
+  ```
