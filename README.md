@@ -235,3 +235,62 @@
   /// 把当前纹理设置为0 号纹理
   glBindTexture(GL_TEXTURE_2D, 0);
   ```
+
+- 多重纹理的设置
+
+  fsShader
+
+  ```c++
+  //fsShader 
+  #ifdef GL_ES
+  precision mediump float;
+  #endif
+  
+  uniform sampler2D U_Texture1;
+  uniform sampler2D U_Texture2;
+  varying vec4 V_Color;
+  varying vec2 V_Texcoord;
+  
+  void main(){
+      /// 多重纹理 叠加
+      gl_FragColor = V_Color*texture2D(U_Texture1,V_Texcoord)
+          *texture2D(U_Texture2,V_Texcoord)
+  }
+  
+  
+  ```
+
+
+
+  Buffer
+
+  ```C++
+  std::map<std::string, UniformTexture*> mUniformTextures;
+  
+  /// 纹理数据
+  void SetTexture(const char * name, const char*imagePath) {
+  	auto iter = mUniformTextures.find(name);
+      /// 没有找到的时候  新建一个纹理对象
+  	if (iter == mUniformTextures.end()) {
+  		GLint location = glGetUniformLocation(mProgram, name);
+  		if (location != -1) {
+  			UniformTexture*t = new UniformTexture;
+  			t->mLocation = location;
+  			t->mTexture = CreateTexture2DFromBMP(imagePath);
+  			mUniformTextures.insert(std::pair<std::string, UniformTexture*>(name, t));
+  		}
+  	}else {
+          /// 有当前纹理 更改纹理 数据
+  		iter->second->mTexture = CreateTexture2DFromBMP(name);
+  	}
+  }
+  
+  
+  /// 纹理绑定
+  int iIndex = 0;
+  for (auto iter=mUniformTextures.begin();iter!=mUniformTextures.end();++iter){
+      glActiveTexture(GL_TEXTURE0 + iIndex);
+      glBindTexture(GL_TEXTURE_2D, iter->second->mTexture);
+      glUniform1i(iter->second->mLocation, iIndex++);
+  }
+  ```
