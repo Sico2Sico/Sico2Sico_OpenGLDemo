@@ -320,4 +320,51 @@
   	glDeleteShader(vsShader);
   	return program;
   }
+  
+  /// 数据捕获打印
+  const char *values[] = {
+    "gl_Position",
+     "V_Color"
+  };
+  
+  GLuint feedBackProgram = GreateFeedbackProgram("Res/feedBack.vs",values,2,GL_INTERLEAVED_ATTRIBS);
+  GLuint posLoction = glGetAttribLocation(feedBackProgram,"position");
+  GLuint colorLocation = glGetAttribLocation(feedBackProgram,"color");
+  
+  float vertexes[] = {
+     	 -1.0f,0.0f,-1.0f,1.0f,  1.0f,1.0f,1.0f,1.0f,
+       1.0f,0.0f,-1.0f,1.0f,  1.0f,1.0f,1.0f,1.0f,
+       -0.0f,1.0f,-1.0f,1.0f,  1.0f,1.0f,1.0f,1.0f,
+  }
+  
+  GLuint vbo = GreateBufferObject(GL_ARRAY_BUFFER,sizeof(float)*24,GL_STATIC_DRAW,vertexes);
+  GLuint feedbackVBO =  GreateBufferObject(GL_ARRAY_BUFFER,sizeof(float)*24,GL_STATIC_DRAW,nullptr);
+  glEnable(GL_RASTERIZER_DISCARD);
+  glUseProgram(feedbackProgram);
+  glBindBuffer(GL_ARRAY_BUFFER,vbo);
+  glEnableVertexAttribArray(posLoction);
+  glVertexAttribPointer(posLocation,4,GL_FLOAT,GL_FALSE,sizeof(float)*8,(void*)0);
+  glEnableVertexAttribArray(colorLocation);
+  glVertexAttribPointer(colorLocation,4,GL_FLOAT,GL_FALSE,sizeof(float)*8,(void*)(sizeof(float)*4));
+  glBindBufferBase(GL_TRANSFORM_FEEDBACK_BUFFER,0,feedbackVBO);
+  glBeginTransformFeedback(GL_TRIANGLES);
+  glDrawArrays(GL_TRIAGNLES,0,3);
+  glEndTransformFeedback();
+  glBindBuffer(GL_ARRAY_BUFFER,0);
+  glUserProgram(0);
+  glDisable(GL_RASTERIZER_DISCARD);
+  
+  glBindBuffer(GL_ARRAY_BUFFER,feedbackVBO);
+  float *feedBackVertexes = (float*)glMapBuffer(GL_ARRAY_BUFFER,GL_READ_WRITE);
+  for (int i=0; i < 24; i+=8){
+      printf("%d:\n pos:%f,%f,%f,%f  color:%f,%f,%f,%f",i,feedBackVertexes[i],feedBackVertexes[i+1],feedBackVertexes[i+2],feedBackVertexes[i+3],feedBackVertexes[i+4],feedBackVertexes[i+5],feedBackVertexes[i+6],feedBackVertexes[i+7]);
+      
+  glUnmapBuffer(GL_ARRAY_BUFFER);
+  glBindBuffer(GL_ARRAY_BUFFER,0);
+  }
+  
+  
+  
   ```
+
+
