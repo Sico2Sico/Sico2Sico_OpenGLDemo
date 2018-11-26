@@ -238,59 +238,86 @@
 
 - 多重纹理的设置
 
-  fsShader
+  - fsShader
+
+    ```c++
+    //fsShader 
+    #ifdef GL_ES
+    precision mediump float;
+    #endif
+    
+    uniform sampler2D U_Texture1;
+    uniform sampler2D U_Texture2;
+    varying vec4 V_Color;
+    varying vec2 V_Texcoord;
+    
+    void main(){
+        /// 多重纹理 叠加
+        gl_FragColor = V_Color*texture2D(U_Texture1,V_Texcoord)
+            *texture2D(U_Texture2,V_Texcoord)
+    }
+    ```
+
+
+  - buffer
+
+    ```c++
+    std::map<std::string, UniformTexture*> mUniformTextures;
+    
+    /// 纹理数据
+    void SetTexture(const char * name, const char*imagePath) {
+    	auto iter = mUniformTextures.find(name);
+        /// 没有找到的时候  新建一个纹理对象
+    	if (iter == mUniformTextures.end()) {
+    		GLint location = glGetUniformLocation(mProgram, name);
+    		if (location != -1) {
+    			UniformTexture*t = new UniformTexture;
+    			t->mLocation = location;
+    			t->mTexture = CreateTexture2DFromBMP(imagePath);
+    			mUniformTextures.insert(std::pair<std::string, UniformTexture*>(name, t));
+    		}
+    	}else {
+            /// 有当前纹理 更改纹理 数据
+    		iter->second->mTexture = CreateTexture2DFromBMP(name);
+    	}
+    }
+    
+    
+    /// 纹理绑定
+    int iIndex = 0;
+    for (auto iter=mUniformTextures.begin();iter!=mUniformTextures.end();++iter){
+        glActiveTexture(GL_TEXTURE0 + iIndex);
+        glBindTexture(GL_TEXTURE_2D, iter->second->mTexture);
+        glUniform1i(iter->second->mLocation, iIndex++);
+    }
+    ```
+
+
+- Feedback
 
   ```c++
-  //fsShader 
-  #ifdef GL_ES
-  precision mediump float;
-  #endif
-  
-  uniform sampler2D U_Texture1;
-  uniform sampler2D U_Texture2;
-  varying vec4 V_Color;
-  varying vec2 V_Texcoord;
-  
-  void main(){
-      /// 多重纹理 叠加
-      gl_FragColor = V_Color*texture2D(U_Texture1,V_Texcoord)
-          *texture2D(U_Texture2,V_Texcoord)
-  }
-  
-  
-  ```
-
-
-
-  Buffer
-
-  ```C++
-  std::map<std::string, UniformTexture*> mUniformTextures;
-  
-  /// 纹理数据
-  void SetTexture(const char * name, const char*imagePath) {
-  	auto iter = mUniformTextures.find(name);
-      /// 没有找到的时候  新建一个纹理对象
-  	if (iter == mUniformTextures.end()) {
-  		GLint location = glGetUniformLocation(mProgram, name);
-  		if (location != -1) {
-  			UniformTexture*t = new UniformTexture;
-  			t->mLocation = location;
-  			t->mTexture = CreateTexture2DFromBMP(imagePath);
-  			mUniformTextures.insert(std::pair<std::string, UniformTexture*>(name, t));
-  		}
-  	}else {
-          /// 有当前纹理 更改纹理 数据
-  		iter->second->mTexture = CreateTexture2DFromBMP(name);
+  GLuint CreateFeedbackProgram(const char*shaderPath, const char **values, int count, 	  GLenum param){
+  	int fileSize = 0;
+  	const char* vsCode = (char*)LoadFileContent(shaderPath,fileSize);
+  	if (vsCode==nullptr){
+  		return 0;
   	}
-  }
-  
-  
-  /// 纹理绑定
-  int iIndex = 0;
-  for (auto iter=mUniformTextures.begin();iter!=mUniformTextures.end();++iter){
-      glActiveTexture(GL_TEXTURE0 + iIndex);
-      glBindTexture(GL_TEXTURE_2D, iter->second->mTexture);
-      glUniform1i(iter->second->mLocation, iIndex++);
+      
+  	GLuint vsShader = glCreateShader(GL_VERTEX_SHADER);
+  	glShaderSource(vsShader, 1, &vsCode, nullptr);
+  	glCompileShader(vsShader);
+  	GLuint program = glCreateProgram();
+  	glAttachShader(program, vsShader);
+      
+      ///新的ApI
+      /// 第一个参数 程序
+      /// 第二个参数 捕获多少个
+      /// 第三个参数 捕获哪些 变量数组 
+      /// 第四个参数 捕获模式
+  	glTransformFeedbackVaryings(program, count, values, param);
+  	glLinkProgram(program);
+  	glDetachShader(program, vsShader);
+  	glDeleteShader(vsShader);
+  	return program;
   }
   ```
